@@ -35,6 +35,7 @@ extern "C" {
 #define PCBA_8258_C1T139A30_V1_0        2
 #define PCBA_8258_C1T139A30_V1_2        3
 #define PCBA_8258_C1T140A3_V1_1         4   // 32pin
+#define PCBA_8258_TB_03F_KIT            5
 
 #ifndef PCBA_8258_SEL // user can define in user_app_config.h
 #if (MESH_USER_DEFINE_MODE == MESH_IRONMAN_MENLO_ENABLE)
@@ -104,13 +105,18 @@ extern "C" {
 #endif 
 
 #if (HCI_ACCESS==HCI_USE_UART)
+#if (PCBA_8258_SEL == PCBA_8258_TB_03F_KIT)
+#define UART_TX_PIN		UART_TX_PB1
+#define UART_RX_PIN		UART_RX_PA0
+#else
 #define UART_TX_PIN		UART_TX_PD7
 #define UART_RX_PIN		UART_RX_PA0
 #endif
 #endif
+#endif
 
 #ifndef HCI_LOG_FW_EN
-#define HCI_LOG_FW_EN   (0 || DEBUG_LOG_SETTING_DEVELOP_MODE_EN)
+#define HCI_LOG_FW_EN   (0 || DEBUG_LOG_SETTING_DEVELOP_MODE_EN || PCBA_8258_SEL == PCBA_8258_TB_03F_KIT)
 #if HCI_LOG_FW_EN
 	#if (MESH_USER_DEFINE_MODE == MESH_IRONMAN_MENLO_ENABLE)
 #define DEBUG_INFO_TX_PIN           		(PCBA_8258_SEL == PCBA_8258_C1T140A3_V1_1 ? GPIO_PB6 : GPIO_PD7)
@@ -252,6 +258,13 @@ extern "C" {
 #define PB3_INPUT_ENABLE		1
 #define	SW1_GPIO				GPIO_PB2            // SW2 in board
 #define	SW2_GPIO				GPIO_PB3            // SW4 in board
+#elif (PCBA_8258_SEL == PCBA_8258_TB_03F_KIT)
+#define PULL_WAKEUP_SRC_PB2     PM_PIN_PULLUP_1M	//btn
+#define PULL_WAKEUP_SRC_PB3     PM_PIN_PULLUP_1M	//btn
+#define PB2_INPUT_ENABLE		1
+#define PB3_INPUT_ENABLE		1
+#define	SW1_GPIO				GPIO_PB2            // SW2 in board
+#define	SW2_GPIO				GPIO_PB3            // SW4 in board
 
 #if 1 // must output 0, because it is keyboard array. pull down is not enough to output low level.
 #define PB4_FUNC                AS_GPIO
@@ -291,6 +304,11 @@ extern "C" {
 #define PWM_G       GPIO_PWM1ND3	//green
 #define PWM_B       GPIO_PWM3D2		//blue
 #define PWM_W       GPIO_PWM2ND4		//white
+#elif (PCBA_8258_SEL == PCBA_8258_TB_03F_KIT)
+#define PWM_R       GPIO_PWM1C3	//red
+#define PWM_G       GPIO_PWM2_PWM0N_C4	//green
+#define PWM_B       GPIO_PWM0C2		//blue
+#define PWM_W       GPIO_PWM5B5		//white
 
 #endif
 
@@ -329,7 +347,11 @@ extern "C" {
 
 /////////////////// Clock  /////////////////////////////////
 #define	USE_SYS_TICK_PER_US
+#if (PCBA_8258_SEL == PCBA_8258_TB_03F_KIT)
+#define CLOCK_SYS_TYPE  		CLOCK_TYPE_PAD
+#else
 #define CLOCK_SYS_TYPE  		CLOCK_TYPE_PLL	//  one of the following:  CLOCK_TYPE_PLL, CLOCK_TYPE_OSC, CLOCK_TYPE_PAD, CLOCK_TYPE_ADC
+#endif
 
 #if DUAL_MESH_ZB_BL_EN // keep same with zb
 #define CLOCK_SYS_CLOCK_HZ  	32000000

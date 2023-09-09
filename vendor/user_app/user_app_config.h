@@ -34,7 +34,7 @@ extern "C" {
 */
 
 // #define RAM_SIZE_MAX            		(48*1024)	// 8253/8273
-
+#define LIGHT_TYPE_SEL LIGHT_TYPE_HSL
 
 // ------- function Macro ---------
 // #define CB_USER_FACTORY_RESET_ADDITIONAL()   cb_user_factory_reset_additional()

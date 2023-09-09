@@ -28,6 +28,7 @@
 #pragma pack(1)
 #endif
 #include "proj/mcu/config.h"
+#define PCBA_8258_SEL			PCBA_8258_TB_03F_KIT
 
 #if (__PROJECT_8266_MASTER_KMA_DONGLE__ || __PROJECT_8267_MASTER_KMA_DONGLE__)
 	#include "../8267_master_kma_dongle/app_config.h"
