@@ -259,12 +259,12 @@ extern "C" {
 #define	SW1_GPIO				GPIO_PB2            // SW2 in board
 #define	SW2_GPIO				GPIO_PB3            // SW4 in board
 #elif (PCBA_8258_SEL == PCBA_8258_TB_03F_KIT)
-#define PULL_WAKEUP_SRC_PB2     PM_PIN_PULLUP_1M	//btn
-#define PULL_WAKEUP_SRC_PB3     PM_PIN_PULLUP_1M	//btn
-#define PB2_INPUT_ENABLE		1
-#define PB3_INPUT_ENABLE		1
-#define	SW1_GPIO				GPIO_PB2            // SW2 in board
-#define	SW2_GPIO				GPIO_PB3            // SW4 in board
+#define PULL_WAKEUP_SRC_PD7     PM_PIN_PULLUP_1M	//btn
+#define PULL_WAKEUP_SRC_PA1     PM_PIN_PULLUP_1M	//btn
+#define PD7_INPUT_ENABLE		1
+#define PA1_INPUT_ENABLE		1
+#define	SW1_GPIO				GPIO_PD7
+#define	SW2_GPIO				GPIO_PA1
 
 #if 1 // must output 0, because it is keyboard array. pull down is not enough to output low level.
 #define PB4_FUNC                AS_GPIO

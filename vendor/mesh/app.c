@@ -355,7 +355,7 @@ void proc_ui()
 	}
 	tick = clock_time();
 
-	#if 0
+	#if 1
 	static u8 st_sw1_last,st_sw2_last;	
 	u8 st_sw1 = !gpio_read(SW1_GPIO);
 	u8 st_sw2 = !gpio_read(SW2_GPIO);
